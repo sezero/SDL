@@ -460,10 +460,12 @@ set(SDL_STATIC ${SDL_STATIC_ENABLED_BY_DEFAULT} CACHE BOOL "Build a static versi
 dep_option(SDL_STATIC_PIC      "Static version of the library should be built with Position Independent Code" OFF "SDL_STATIC" OFF)
 set_option(SDL_TEST            "Build the test directory" OFF)
 
-if(HIDAPI_ONLY_LIBUSB)
-  set(SDL_HIDAPI_LIBUSB ON CACHE BOOL "" FORCE)
-elseif(HIDAPI_SKIP_LIBUSB)
-  set(SDL_HIDAPI_LIBUSB OFF CACHE BOOL "" FORCE)
+if(SDL_HIDAPI)
+  if(HIDAPI_ONLY_LIBUSB)
+    set(SDL_HIDAPI_LIBUSB ON CACHE BOOL "" FORCE)
+  elseif(HIDAPI_SKIP_LIBUSB)
+    set(SDL_HIDAPI_LIBUSB OFF CACHE BOOL "" FORCE)
+  endif()
 endif()
 
 if(VITA)
