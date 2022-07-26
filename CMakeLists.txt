@@ -448,8 +448,10 @@ dep_option(SDL_KMSDRM_SHARED       "Dynamically load KMS DRM support" ON "SDL_KM
 set_option(SDL_OFFSCREEN           "Use offscreen video driver" OFF)
 option_string(SDL_BACKGROUNDING_SIGNAL "number to use for magic backgrounding signal or 'OFF'" OFF)
 option_string(SDL_FOREGROUNDING_SIGNAL "number to use for magic foregrounding signal or 'OFF'" OFF)
-set_option(SDL_HIDAPI_JOYSTICK     "Use HIDAPI for low level joystick drivers" ON)
-set_option(SDL_VIRTUAL_JOYSTICK    "Enable the virtual-joystick driver" ON)
+set_option(SDL_HIDAPI              "Enable the HIDAPI subsystem" ON)
+dep_option(SDL_HIDAPI_LIBUSB       "Use libusb for low level joystick drivers" OFF SDL_HIDAPI OFF)
+dep_option(SDL_HIDAPI_JOYSTICK     "Use HIDAPI for low level joystick drivers" ON SDL_HIDAPI OFF)
+dep_option(SDL_VIRTUAL_JOYSTICK    "Enable the virtual-joystick driver" ON SDL_HIDAPI OFF)
 set_option(SDL_ASAN                "Use AddressSanitizer to detect memory errors" OFF)
 
 set(SDL_SHARED ${SDL_SHARED_ENABLED_BY_DEFAULT} CACHE BOOL "Build a shared version of the library")
@@ -457,6 +459,12 @@ set(SDL_STATIC ${SDL_STATIC_ENABLED_BY_DEFAULT} CACHE BOOL "Build a static versi
 
 dep_option(SDL_STATIC_PIC      "Static version of the library should be built with Position Independent Code" OFF "SDL_STATIC" OFF)
 set_option(SDL_TEST            "Build the test directory" OFF)
+
+if(HIDAPI_ONLY_LIBUSB)
+  set(SDL_HIDAPI_LIBUSB ON CACHE BOOL "" FORCE)
+elseif(HIDAPI_SKIP_LIBUSB)
+  set(SDL_HIDAPI_LIBUSB OFF CACHE BOOL "" FORCE)
+endif()
 
 if(VITA)
   set_option(VIDEO_VITA_PIB  "Build with PSVita piglet gles2 support" OFF)
