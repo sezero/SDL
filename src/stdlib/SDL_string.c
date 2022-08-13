@@ -1299,7 +1299,7 @@ SDL_vsscanf(const char *text, const char *fmt, va_list ap)
                     SDL_FALLTHROUGH;
                 case 'd':
                     if (inttype == DO_LONGLONG) {
-                        Sint64 value;
+                        Sint64 value = 0;
                         advance = SDL_ScanLongLong(text, count, radix, &value);
                         text += advance;
                         if (advance && !suppress) {
@@ -1308,7 +1308,7 @@ SDL_vsscanf(const char *text, const char *fmt, va_list ap)
                             ++retval;
                         }
                     } else {
-                        long value;
+                        long value = 0;
                         advance = SDL_ScanLong(text, count, radix, &value);
                         text += advance;
                         if (advance && !suppress) {
