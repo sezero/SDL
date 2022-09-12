@@ -23866,6 +23866,7 @@ $as_echo_n "checking for Linux kd.h... " >&6; }
 
       #include <linux/kd.h>
       #include <linux/keyboard.h>
+      #include <sys/ioctl.h>
 
 int
 main ()
