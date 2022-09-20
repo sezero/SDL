@@ -56,7 +56,7 @@ static unsigned UTF8_TrailingBytes(unsigned char c)
         return 0;
 }
 
-#if !defined(HAVE_VSSCANF) || !defined(HAVE_STRTOL)
+#if !defined(HAVE_VSSCANF) || !defined(HAVE_STRTOL) || !defined(HAVE_STRTOUL) || !defined(HAVE_STRTOD)
 static size_t
 SDL_ScanLong(const char *text, int count, int radix, long *valuep)
 {
@@ -107,6 +107,10 @@ SDL_ScanUnsignedLong(const char *text, int count, int radix, unsigned long *valu
 {
     const char *textstart = text;
     unsigned long value = 0;
+
+    if (*text == '-') {
+        return SDL_ScanLong(text, count, radix, (long *)valuep);
+    }
 
     if (radix == 16 && SDL_strncmp(text, "0x", 2) == 0) {
         text += 2;
@@ -169,7 +173,7 @@ SDL_ScanUintPtrT(const char *text, int radix, uintptr_t * valuep)
 }
 #endif
 
-#if !defined(HAVE_VSSCANF) || !defined(HAVE_STRTOLL)
+#if !defined(HAVE_VSSCANF) || !defined(HAVE_STRTOLL) || !defined(HAVE_STRTOULL)
 static size_t
 SDL_ScanLongLong(const char *text, int count, int radix, Sint64 * valuep)
 {
@@ -220,6 +224,10 @@ SDL_ScanUnsignedLongLong(const char *text, int count, int radix, Uint64 * valuep
 {
     const char *textstart = text;
     Uint64 value = 0;
+
+    if (*text == '-') {
+        return SDL_ScanLongLong(text, count, radix, (Sint64 *)valuep);
+    }
 
     if (radix == 16 && SDL_strncmp(text, "0x", 2) == 0) {
         text += 2;
