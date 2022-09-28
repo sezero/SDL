@@ -234,27 +234,6 @@
 			remoteGlobalIDString = BECDF6BE0761BA81005FE872;
 			remoteInfo = "Standard DMG";
 		};
-		F3A495A42555ED0500E92A8B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F3A495802555ED0400E92A8B /* SDL.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A75FDB8C23E4C74400529352;
-			remoteInfo = hidapi;
-		};
-		F3A495A62555ED0500E92A8B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F3A495802555ED0400E92A8B /* SDL.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A75FDB4923E399AC00529352;
-			remoteInfo = "hidapi-iOS";
-		};
-		F3A495A82555ED0500E92A8B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F3A495802555ED0400E92A8B /* SDL.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A75FDB6E23E3A2C900529352;
-			remoteInfo = "hidapi-tvOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -546,9 +525,6 @@
 				F3A4959F2555ED0500E92A8B /* libSDL2.dylib */,
 				F3A495A12555ED0500E92A8B /* libSDL2.dylib */,
 				F3A495A32555ED0500E92A8B /* SDL2 */,
-				F3A495A52555ED0500E92A8B /* hidapi.framework */,
-				F3A495A72555ED0500E92A8B /* hidapi.framework */,
-				F3A495A92555ED0500E92A8B /* hidapi.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -879,27 +855,6 @@
 			fileType = "compiled.mach-o.executable";
 			path = SDL2;
 			remoteRef = F3A495A22555ED0500E92A8B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F3A495A52555ED0500E92A8B /* hidapi.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = hidapi.framework;
-			remoteRef = F3A495A42555ED0500E92A8B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F3A495A72555ED0500E92A8B /* hidapi.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = hidapi.framework;
-			remoteRef = F3A495A62555ED0500E92A8B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F3A495A92555ED0500E92A8B /* hidapi.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = hidapi.framework;
-			remoteRef = F3A495A82555ED0500E92A8B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
