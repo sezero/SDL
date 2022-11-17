@@ -17,7 +17,7 @@ jobs:
         platform:
         - { name: Windows (mingw32),      os: windows-latest, shell: 'msys2 {0}', msystem: mingw32, msys-env: mingw-w64-i686 }
         - { name: Windows (mingw64),      os: windows-latest, shell: 'msys2 {0}', msystem: mingw64, msys-env: mingw-w64-x86_64 }
-        - { name: Linux,                  os: ubuntu-20.04,   shell: sh,   flags: -GNinja }
+        - { name: Linux,                  os: ubuntu-22.04,   shell: sh,   flags: -GNinja }
         - { name: MacOS,                  os: macos-latest,   shell: sh }
 
     steps:
@@ -36,7 +36,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
-        sudo apt-get install wayland-protocols \
+        sudo apt-get install \
           pkg-config \
           ninja-build \
           libasound2-dev \
@@ -44,19 +44,17 @@ jobs:
           libegl1-mesa-dev \
           libgl1-mesa-dev \
           libgles2-mesa-dev \
-          libglu1-mesa-dev \
           libibus-1.0-dev \
+          libpipewire-0.3-dev \
           libpulse-dev \
-          libsdl2-2.0-0 \
           libsndio-dev \
           libudev-dev \
           libwayland-dev \
-          libwayland-client++0 \
-          wayland-scanner++ \
-          libwayland-cursor++0 \
+          libdecor-0-dev \
           libx11-dev \
           libxcursor-dev \
           libxext-dev \
+          libxfixes-dev \
           libxi-dev \
           libxinerama-dev \
           libxkbcommon-dev \
@@ -66,16 +64,8 @@ jobs:
           libxv-dev \
           libxxf86vm-dev \
           libdrm-dev \
-          libgbm-dev\
-          libpulse-dev \
-          libpango1.0-dev
-        sudo apt install meson
-        git clone --depth 1 https://gitlab.gnome.org/jadahl/libdecor.git --branch 0.1.0
-        cd libdecor
-        meson build --buildtype release -Ddemo=false -Ddbus=disabled
-        ninja -C build
-        sudo meson install -C build
-    - uses: actions/checkout@v2
+          libgbm-dev
+    - uses: actions/checkout@v3
     - name: Configure CMake
       run: cmake -B build -DSDL_TEST=ON ${{ matrix.platform.flags }}
     - name: Build
