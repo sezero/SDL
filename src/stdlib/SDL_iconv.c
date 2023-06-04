@@ -859,8 +859,8 @@ SDL_iconv_string(const char *tocode, const char *fromcode, const char *inbuf,
                 outbuf = string + (outbuf - oldstring);
                 outbytesleft = stringsize - (outbuf - string);
                 SDL_memset(outbuf, 0, 4);
+                continue;
             }
-            break;
         case SDL_ICONV_EILSEQ:
             /* Try skipping some input data - not perfect, but... */
             ++inbuf;
