@@ -1741,6 +1741,20 @@ SDL_PrintFloat(char *text, size_t maxlen, SDL_FormatInfo *info, double arg)
     return length;
 }
 
+static size_t SDL_PrintPointer(char *text, size_t maxlen, SDL_FormatInfo *info, const void *value)
+{
+    char num[130];
+    size_t length;
+
+    if (!value) {
+        return SDL_PrintString(text, maxlen, info, NULL);
+    }
+
+    SDL_ulltoa((unsigned long long)(uintptr_t)value, num, 16);
+    length = SDL_PrintString(text, maxlen, info, "0x");
+    return length + SDL_PrintString(TEXT_AND_LEN_ARGS, info, num);
+}
+
 int
 SDL_vsnprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, const char *fmt, va_list ap)
 {
@@ -1874,6 +1888,10 @@ SDL_vsnprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, const char *fmt, 
                     done = SDL_TRUE;
                     break;
                 case 'p':
+                    info.force_case = SDL_CASE_LOWER;
+                    length += SDL_PrintPointer(TEXT_AND_LEN_ARGS, &info, va_arg(ap, void *));
+                    done = SDL_TRUE;
+                    break;
                 case 'x':
                     info.force_case = SDL_CASE_LOWER;
                     SDL_FALLTHROUGH;
@@ -1883,9 +1901,6 @@ SDL_vsnprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, const char *fmt, 
                     }
                     if (info.radix == 10) {
                         info.radix = 16;
-                    }
-                    if (*fmt == 'p') {
-                        inttype = DO_LONG;
                     }
                     SDL_FALLTHROUGH;
                 case 'o':
