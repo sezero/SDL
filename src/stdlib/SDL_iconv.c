@@ -60,7 +60,7 @@ SDL_iconv(SDL_iconv_t cd,
     /* iconv's second parameter may or may not be `const char const *` depending on the
        C runtime's whims. Casting to void * seems to make everyone happy, though. */
     const size_t retCode = iconv((iconv_t) ((uintptr_t) cd), (void *) inbuf, inbytesleft, outbuf, outbytesleft);
-    if (retCode == (size_t) - 1) {
+    if (retCode == (size_t)-1) {
         switch (errno) {
         case E2BIG:
             return SDL_ICONV_E2BIG;
@@ -235,7 +235,7 @@ SDL_iconv_open(const char *tocode, const char *fromcode)
             return cd;
         }
     }
-    return (SDL_iconv_t) - 1;
+    return (SDL_iconv_t)-1;
 }
 
 size_t
@@ -817,18 +817,14 @@ SDL_iconv_string(const char *tocode, const char *fromcode, const char *inbuf,
     size_t outbytesleft;
     size_t retCode = 0;
 
-    cd = SDL_iconv_open(tocode, fromcode);
-    if (cd == (SDL_iconv_t) - 1) {
-        /* See if we can recover here (fixes iconv on Solaris 11) */
-        if (!tocode || !*tocode) {
-            tocode = "UTF-8";
-        }
-        if (!fromcode || !*fromcode) {
-            fromcode = "UTF-8";
-        }
-        cd = SDL_iconv_open(tocode, fromcode);
+    if (!tocode || !*tocode) {
+        tocode = "UTF-8";
     }
-    if (cd == (SDL_iconv_t) - 1) {
+    if (!fromcode || !*fromcode) {
+        fromcode = "UTF-8";
+    }
+    cd = SDL_iconv_open(tocode, fromcode);
+    if (cd == (SDL_iconv_t)-1) {
         return NULL;
     }
 
