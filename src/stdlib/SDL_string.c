@@ -2021,8 +2021,10 @@ SDL_vasprintf(char **strp, const char *fmt, va_list ap)
         va_end(aq);
 
         /* Check error code */
-        if (retval < 0)
+        if (retval < 0) {
+            SDL_free(p);
             return retval;
+        }
 
         /* If that worked, return the string */
         if (retval < size) {
