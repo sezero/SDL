@@ -964,12 +964,12 @@ SDL_LoadFile_RW(SDL_RWops * src, size_t *datasize, int freesrc)
 {
     const int FILE_CHUNK_SIZE = 1024;
     Sint64 size;
-    size_t size_read, size_total;
+    size_t size_read, size_total = 0;
     void *data = NULL, *newdata;
 
     if (!src) {
         SDL_InvalidParamError("src");
-        return NULL;
+        goto done;
     }
 
     size = SDL_RWsize(src);
@@ -977,8 +977,11 @@ SDL_LoadFile_RW(SDL_RWops * src, size_t *datasize, int freesrc)
         size = FILE_CHUNK_SIZE;
     }
     data = SDL_malloc((size_t)(size + 1));
+    if (!data) {
+        SDL_OutOfMemory();
+        goto done;
+    }
 
-    size_total = 0;
     for (;;) {
         if ((((Sint64)size_total) + FILE_CHUNK_SIZE) > size) {
             size = (size_total + FILE_CHUNK_SIZE);
@@ -999,12 +1002,12 @@ SDL_LoadFile_RW(SDL_RWops * src, size_t *datasize, int freesrc)
         size_total += size_read;
     }
 
-    if (datasize) {
-        *datasize = size_total;
-    }
     ((char *)data)[size_total] = '\0';
 
 done:
+    if (datasize) {
+        *datasize = size_total;
+    }
     if (freesrc && src) {
         SDL_RWclose(src);
     }
