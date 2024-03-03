@@ -65,7 +65,7 @@ jobs:
           libxxf86vm-dev \
           libdrm-dev \
           libgbm-dev
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Configure CMake
       run: cmake -B build -DSDL_TEST=ON ${{ matrix.platform.flags }}
     - name: Build
