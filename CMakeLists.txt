@@ -3,9 +3,10 @@ if(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})
 endif()
 
 cmake_minimum_required(VERSION 3.0.0...3.5)
-project(SDL2 C CXX)
+project(SDL2 C)
 
 if (HAIKU)
+  enable_language(CXX)
   set(LINKER_LANGUAGE CXX)
 endif()
 
@@ -18,6 +19,7 @@ endif()
 add_library(sdl-build-options INTERFACE)
 
 if(WINDOWS_STORE)
+  enable_language(CXX)
   cmake_minimum_required(VERSION 3.11.0)
   target_compile_definitions(sdl-build-options INTERFACE "-DSDL_BUILDING_WINRT=1")
   target_compile_options(sdl-build-options INTERFACE "-ZW")
