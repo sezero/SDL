@@ -30,7 +30,6 @@ if(MSVC)
   target_compile_options(sdl-build-options INTERFACE "/MP")
 endif(MSVC)
 
-
 # !!! FIXME: this should probably do "MACOSX_RPATH ON" as a target property
 # !!! FIXME:  for the SDL2 shared library (so you get an
 # !!! FIXME:  install_name ("soname") of "@rpath/libSDL-whatever.dylib"
@@ -235,7 +234,7 @@ endif()
 if(UNIX OR MINGW OR MSYS OR (USE_CLANG AND NOT WINDOWS) OR VITA OR PSP)
   set(OPT_DEF_LIBC ON)
 endif()
-if(WINDOWS)
+if(WINDOWS OR DARWIN OR MACOSX OR IOS OR TVOS)
   set(SDL_SYSTEM_ICONV_DEFAULT OFF)
 else()
   set(SDL_SYSTEM_ICONV_DEFAULT ON)
