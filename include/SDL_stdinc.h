@@ -706,6 +706,9 @@ size_t strlcpy(char* dst, const char* src, size_t size);
 size_t strlcat(char* dst, const char* src, size_t size);
 #endif
 
+/* strdup is not ANSI but POSIX, and its prototype might be hidden... */
+char *strdup(const char *str);
+
 /* Starting LLVM 16, the analyser errors out if these functions do not have
    their prototype defined (clang-diagnostic-implicit-function-declaration) */
 #include <stdlib.h>
