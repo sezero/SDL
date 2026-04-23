@@ -149,6 +149,9 @@ static VideoBootStrap *bootstrap[] = {
     &DUMMY_evdev_bootstrap,
 #endif
 #endif
+#ifdef SDL_VIDEO_DRIVER_DOSVESA
+    &DOSVESA_bootstrap,
+#endif
 #ifdef SDL_VIDEO_DRIVER_OPENVR
     &OPENVR_bootstrap,
 #endif
