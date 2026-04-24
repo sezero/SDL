@@ -50,7 +50,7 @@ bool SDL_TryLockSpinlock(SDL_SpinLock *lock)
 #if defined(HAVE_GCC_ATOMICS) || defined(HAVE_GCC_SYNC_LOCK_TEST_AND_SET)
     return __sync_lock_test_and_set(lock, 1) == 0;
 
-#elif defined(_MSC_VER) && (defined(_M_ARM) || defined(_M_ARM64))
+#elif defined(_MSC_VER) && (defined(_M_ARM) || defined(_M_ARM64) || defined(_M_ARM64EC))
     SDL_COMPILE_TIME_ASSERT(locksize, sizeof(*lock) == sizeof(long));
     return _InterlockedExchange_acq((long *)lock, 1) == 0;
 
@@ -167,7 +167,7 @@ void SDL_UnlockSpinlock(SDL_SpinLock *lock)
 #if defined(HAVE_GCC_ATOMICS) || defined(HAVE_GCC_SYNC_LOCK_TEST_AND_SET)
     __sync_lock_release(lock);
 
-#elif defined(_MSC_VER) && (defined(_M_ARM) || defined(_M_ARM64))
+#elif defined(_MSC_VER) && (defined(_M_ARM) || defined(_M_ARM64) || defined(_M_ARM64EC))
     SDL_COMPILE_TIME_ASSERT(locksize, sizeof(*lock) == sizeof(long));
     _InterlockedExchange_rel((long *)lock, 0);
 
