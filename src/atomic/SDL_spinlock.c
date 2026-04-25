@@ -171,16 +171,13 @@ void SDL_UnlockSpinlock(SDL_SpinLock *lock)
     SDL_COMPILE_TIME_ASSERT(locksize, sizeof(*lock) == sizeof(long));
     _InterlockedExchange_rel((long *)lock, 0);
 
-#elif defined(_MSC_VER)
-    _ReadWriteBarrier();
-    *lock = 0;
-
 #elif defined(SDL_PLATFORM_SOLARIS)
     // Used for Solaris when not using gcc.
-    *lock = 0;
     membar_producer();
+    *lock = 0;
 
 #else
+    SDL_MemoryBarrierRelease();
     *lock = 0;
 #endif
 }
