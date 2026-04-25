@@ -79,7 +79,7 @@ SDL_AtomicTryLock(SDL_SpinLock *lock)
 #elif HAVE_GCC_ATOMICS || HAVE_GCC_SYNC_LOCK_TEST_AND_SET
     return (__sync_lock_test_and_set(lock, 1) == 0);
 
-#elif defined(_MSC_VER) && (defined(_M_ARM) || defined(_M_ARM64))
+#elif defined(_MSC_VER) && (defined(_M_ARM) || defined(_M_ARM64) || defined(_M_ARM64EC))
     return (_InterlockedExchange_acq(lock, 1) == 0);
 
 #elif defined(_MSC_VER)
@@ -183,7 +183,7 @@ SDL_AtomicUnlock(SDL_SpinLock *lock)
 #if HAVE_GCC_ATOMICS || HAVE_GCC_SYNC_LOCK_TEST_AND_SET
     __sync_lock_release(lock);
 
-#elif defined(_MSC_VER) && (defined(_M_ARM) || defined(_M_ARM64))
+#elif defined(_MSC_VER) && (defined(_M_ARM) || defined(_M_ARM64) || defined(_M_ARM64EC))
     _InterlockedExchange_rel(lock, 0);
 
 #elif defined(_MSC_VER)
