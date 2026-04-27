@@ -406,7 +406,6 @@ static bool UpdateAudioSession(SDL_AudioDevice *device, bool open, bool allow_pl
 {
     @autoreleasepool {
         AVAudioSession *session = [AVAudioSession sharedInstance];
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
         NSString *category = AVAudioSessionCategoryPlayback;
         NSString *mode = AVAudioSessionModeDefault;
@@ -984,7 +983,7 @@ static bool COREAUDIO_OpenDevice(SDL_AudioDevice *device)
     [center addObserver:listener
                selector:@selector(audioSessionInterruption:)
                    name:AVAudioSessionInterruptionNotification
-                 object:session];
+                 object:[AVAudioSession sharedInstance]];
 
     /* An interruption end notification is not guaranteed to be sent if
        we were previously interrupted... resuming if needed when the app
