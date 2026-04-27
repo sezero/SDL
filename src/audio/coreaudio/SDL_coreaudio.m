@@ -598,7 +598,7 @@ static void COREAUDIO_CloseDevice(SDL_AudioDevice *device)
     if (device->hidden->interruption_listener) {
         SDLInterruptionListener *listener = (SDLInterruptionListener *)CFBridgingRelease(device->hidden->interruption_listener);
         device->hidden->interruption_listener = nil;
-        [center removeObserver:listener];
+        [[NSNotificationCenter defaultCenter] removeObserver:listener];
         @synchronized(listener) {
             listener.device = NULL;
         }
@@ -977,6 +977,7 @@ static bool COREAUDIO_OpenDevice(SDL_AudioDevice *device)
     }
 
 #ifndef MACOSX_COREAUDIO
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     SDLInterruptionListener *listener = [SDLInterruptionListener new];
     listener.device = device;
 
