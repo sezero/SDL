@@ -22,10 +22,10 @@
 /**
  * # CategoryOpenXR
  *
- * Functions for creating OpenXR handles for [GPU API](CategoryGPU) contexts.
+ * Functions for creating OpenXR handles for SDL_gpu contexts.
  *
  * For the most part, OpenXR operates independent of SDL, but the graphics
- * initialization depends on direct support from the GPU API.
+ * initialization depends on direct support from SDL_gpu.
  */
 
 #ifndef SDL_openxr_h_
