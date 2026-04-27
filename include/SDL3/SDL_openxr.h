@@ -19,13 +19,15 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+/* WIKI CATEGORY: OpenXR */
+
 /**
  * # CategoryOpenXR
  *
- * Functions for creating OpenXR handles for SDL_gpu contexts.
+ * Functions for creating OpenXR handles for [GPU API](CategoryGPU) contexts.
  *
  * For the most part, OpenXR operates independent of SDL, but the graphics
- * initialization depends on direct support from SDL_gpu.
+ * initialization depends on direct support from the GPU API.
  */
 
 #ifndef SDL_openxr_h_
