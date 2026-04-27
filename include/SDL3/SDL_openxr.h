@@ -40,6 +40,8 @@
 extern "C" {
 #endif
 
+#ifndef SDL_WIKI_DOCUMENTATION_SECTION
+
 #if defined(OPENXR_H_)
 #define NO_SDL_OPENXR_TYPEDEFS 1
 #endif /* OPENXR_H_ */
@@ -77,6 +79,9 @@ typedef enum XrResult {
 
 #define PFN_xrGetInstanceProcAddr SDL_FunctionPointer
 #endif /* NO_SDL_OPENXR_TYPEDEFS */
+
+#endif /* !SDL_WIKI_DOCUMENTATION_SECTION */
+
 
 /**
  * Creates an OpenXR session.
