@@ -34,7 +34,7 @@
 // #define DEBUG_JOYSTICK
 
 // Define this if you want to log all packets from the controller
-#if 0
+#if 1
 #define DEBUG_XBOX_PROTOCOL
 #endif
 
@@ -372,6 +372,12 @@ static bool HIDAPI_DriverXboxOne_IsSupportedDevice(SDL_HIDAPI_Device *device, co
         // On macOS we get a shortened version of the real report and
         // you can't write output reports for wired controllers, so
         // we'll just use the GCController support instead.
+        return false;
+    }
+#endif
+#ifdef SDL_PLATFORM_WIN32
+    if (SDL_strncmp(device->path, "\\\\?\\HID#", 8) == 0) {
+        // Windows provides a fake HID endpoint for XGIP controllers, don't use this
         return false;
     }
 #endif
