@@ -34,7 +34,7 @@
 // #define DEBUG_JOYSTICK
 
 // Define this if you want to log all packets from the controller
-#if 1
+#if 0
 #define DEBUG_XBOX_PROTOCOL
 #endif
 
