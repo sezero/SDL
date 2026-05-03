@@ -899,9 +899,7 @@ static void pointer_handle_axis_relative_direction(void *data, struct wl_pointer
                                                    uint32_t axis, uint32_t axis_relative_direction)
 {
     struct SDL_WaylandInput *input = data;
-    if (axis != WL_POINTER_AXIS_VERTICAL_SCROLL) {
-        return;
-    }
+
     switch (axis_relative_direction) {
     case WL_POINTER_AXIS_RELATIVE_DIRECTION_IDENTICAL:
         input->pointer_curr_axis_info.direction = SDL_MOUSEWHEEL_NORMAL;
