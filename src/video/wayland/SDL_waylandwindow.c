@@ -2160,9 +2160,7 @@ void Wayland_ShowWindow(SDL_VideoDevice *_this, SDL_Window *window)
     data->showing_window = false;
 
     // Send an exposure event to signal that the client should draw.
-    if (data->shell_surface_status == WAYLAND_SHELL_SURFACE_STATUS_WAITING_FOR_FRAME) {
-        SDL_SendWindowEvent(window, SDL_EVENT_WINDOW_EXPOSED, 0, 0);
-    }
+    SDL_SendWindowEvent(window, SDL_EVENT_WINDOW_EXPOSED, 0, 0);
 }
 
 static void Wayland_ReleasePopup(SDL_VideoDevice *_this, SDL_Window *popup)
