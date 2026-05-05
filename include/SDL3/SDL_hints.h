@@ -4134,13 +4134,15 @@ extern "C" {
  * If set, this can result in smoother window resizing when rendering using
  * OpenGL, however, there are some conditions:
  *
- *  - It is only activated on windows created with the `SDL_WINDOW_OPENGL` flag
- *    (windows using an SDL OpenGL renderer have this automatically set).
- *  - When activated, presentation must be done with `SDL_GL_SwapWindow()`
- *    (`SDL_RenderPresent()` calls this internally for OpenGL renderers as well).
+ * - It is only activated on windows created with the `SDL_WINDOW_OPENGL` flag
+ *   (windows using an SDL OpenGL renderer have this automatically set).
+ * - When activated, presentation must be done with `SDL_GL_SwapWindow()`
+ *   (`SDL_RenderPresent()` calls this internally for OpenGL renderers as
+ *   well).
  *
  * Enabling this and presenting via an external mechanism will result in sync
- * requests not being acked, and hangs and other odd window behavior may result.
+ * requests not being acked, and hangs and other odd window behavior may
+ * result.
  *
  * The variable can be set to the following values:
  *
