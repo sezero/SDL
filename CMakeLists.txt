@@ -2546,7 +2546,9 @@ elseif(OS2)
   if(SDL_THREADS)
     set(SDL_THREAD_OS2 1)
     file(GLOB OS2_THREAD_SOURCES ${SDL2_SOURCE_DIR}/src/thread/os2/*.c)
-    set(SOURCE_FILES ${SOURCE_FILES} ${OS2_THREAD_SOURCES})
+    set(SOURCE_FILES ${SOURCE_FILES} 
+      ${OS2_THREAD_SOURCES} 
+      ${SDL2_SOURCE_DIR}/src/thread/generic/SDL_syscond.c)
     set(HAVE_SDL_THREADS TRUE)
   endif()
 
